@@ -14,6 +14,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
@@ -43,13 +45,11 @@ public class UserController {
         return modelAndView;
     }
     @PostMapping("/login")
-    public ModelAndView verifyUser(User user, HttpServletResponse response){
-        try {
-            User userLoggedIn = userService.findByUsernameOrEmailAndPassword(user);
-            response.addCookie(new Cookie("id", ""+userLoggedIn.getId()));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    public ModelAndView verifyUser(User user, HttpServletResponse response) throws Exception {
+
+        User userLoggedIn = userService.findByUsernameOrEmailAndPassword(user);
+        response.addCookie(new Cookie("id", ""+userLoggedIn.getId()));
+
         ModelAndView modelAndView = new ModelAndView("redirect:/dashboard");
 
         return modelAndView;
@@ -57,22 +57,34 @@ public class UserController {
 
     @GetMapping("/dashboard")
     public ModelAndView getDashboardForm(HttpServletRequest request){
-        /*
         Cookie[] cookies = request.getCookies();
-        String ids = String.valueOf(Arrays.stream(request.getCookies())
-                .map(Cookie::getValue)
-                .findAny()).toString();
-        System.out.println(ids);*/
-        //int cookieValue = Integer.parseInt(ids);
+        Map<String, Cookie> cookieMap = new HashMap<>();
+        for(Cookie cookie: cookies){
+            cookieMap.put(cookie.getName(), cookie);
+        }
+        Cookie firstRequiredCookie = cookieMap.get("id");
+        int cookieValue = Integer.parseInt(firstRequiredCookie.getValue());//doar pentru a proba dashboard-ul
+        System.out.println("the cookie value is: "+firstRequiredCookie.getValue());
+
         ModelAndView modelAndView = new ModelAndView("dashboard-form");
-        int cookieValue = 3;//doar pentru a proba dashboard-ul
+
+        modelAndView.addObject("user", userService.getUserById(cookieValue).getRole());
         modelAndView.addObject("user",userService.getUserById(cookieValue));
         modelAndView.addObject("bookList", bookService.getBooks());
         return modelAndView;
     }
     @PostMapping("/dashboard")
-    public ModelAndView verifyUserForAdd(User user){
-        if(user.getRole() != "admin"){
+    public ModelAndView verifyUserForAdd(User user, HttpServletRequest request){
+        Cookie[] cookies = request.getCookies();
+        Map<String, Cookie> cookieMap = new HashMap<>();
+        for(Cookie cookie: cookies){
+            cookieMap.put(cookie.getName(), cookie);
+        }
+        Cookie firstRequiredCookie = cookieMap.get("id");
+        int cookieValue = Integer.parseInt(firstRequiredCookie.getValue());//doar pentru a proba dashboard-ul
+        System.out.println("the cookie value is: "+firstRequiredCookie.getValue());
+
+        if(userService.getUserById(cookieValue).getRole().equals("admin")==true){
             ModelAndView modelAndView = new ModelAndView("redirect:/add");
             return modelAndView;
         }else{

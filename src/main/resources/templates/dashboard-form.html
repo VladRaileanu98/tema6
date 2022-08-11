@@ -10,6 +10,9 @@
     <i>Hello <</i>
     <i th:text="${user.getUsername()}"></i>
     <i>></i>
+    <i th:text="${user.getRole()}"></i>
+    <br>
+    <br>
     <p th:each="book: ${bookList}" th:text="${book.title}"></p>
 <form action="/dashboard" method="post">
     <button type="submit" class="btn btn-primary">Add book</button>

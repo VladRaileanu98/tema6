@@ -24,9 +24,6 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User getUserByCookieId(@CookieValue int id){
-        return userRepository.findById(id);
-    }
 
     public User getUserById(int id){
         return userRepository.findUserById(id);
