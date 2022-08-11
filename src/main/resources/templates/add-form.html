@@ -20,10 +20,17 @@
         <span class="input-group-text" id="publisher">Publisher</span>
         <input type="text" class="form-control" placeholder="Publisher" aria-label="Publisher" aria-describedby="publisher" name="publisher">
     </div>
+
+
+
     <button type="submit" class="btn btn-primary">Submit</button>
-
-
 </form>
+<label for="book">Choose an author:</label>
+<select name="book" id="book">
+    <option th:each="author: ${authorList}" th:text="${author.name}">author</option>
+</select>
+<br>
+<br>
 
 </body>
 </html>
