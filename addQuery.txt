@@ -1,5 +1,10 @@
 SELECT * FROM bookstore.author;
 
+INSERT INTO `bookstore`.`user`(`email`,`name`,`password`,`role`,`username`) VALUES("Alexandru98Raileanu@yahoo.com","Alexandru","parola","admin","VladAlex");
+INSERT INTO `bookstore`.`user`(`email`,`name`,`password`,`role`,`username`) VALUES("mitica@yahoo.com","Mitica","parola","client","MiticaPopescu");
+INSERT INTO `bookstore`.`user`(`email`,`name`,`password`,`role`,`username`) VALUES("MihaiRadulescu@yahoo.com","Mihai","parola","client","MihaiRadu");
+INSERT INTO `bookstore`.`user`(`email`,`name`,`password`,`role`,`username`) VALUES("IoanaAdam@yahoo.com","Ioana","parola","client","IoanaAdam");
+
 INSERT INTO `bookstore`.`book`(`page_no`,`publisher`,`title`) VALUES(250,"Penguin Random House","Eat that frog");
 INSERT INTO `bookstore`.`book`(`page_no`,`publisher`,`title`) VALUES(240,"Penguin Random House","The way to wealth");
 INSERT INTO `bookstore`.`book`(`page_no`,`publisher`,`title`) VALUES(256,"Penguin Random House","7 habits of highly effective people");
