@@ -5,15 +5,16 @@ import com.db.bookstore.model.User;
 import com.db.bookstore.service.BookService;
 import com.db.bookstore.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
+import java.util.Optional;
 
 @Controller
 public class UserController {
@@ -55,9 +56,16 @@ public class UserController {
     }
 
     @GetMapping("/dashboard")
-    public ModelAndView getDashboardForm(){
+    public ModelAndView getDashboardForm(HttpServletRequest request){
+        /*
+        Cookie[] cookies = request.getCookies();
+        String ids = String.valueOf(Arrays.stream(request.getCookies())
+                .map(Cookie::getValue)
+                .findAny()).toString();
+        System.out.println(ids);*/
+        //int cookieValue = Integer.parseInt(ids);
         ModelAndView modelAndView = new ModelAndView("dashboard-form");
-        int cookieValue = 3; //doar pentru a proba dashboard-ul
+        int cookieValue = 3;//doar pentru a proba dashboard-ul
         modelAndView.addObject("user",userService.getUserById(cookieValue));
         modelAndView.addObject("bookList", bookService.getBooks());
         return modelAndView;
@@ -73,17 +81,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("/add")
-    public ModelAndView getAddView(){
-        ModelAndView modelAndView = new ModelAndView("add-form");
-        return modelAndView;
-    }
-    @PostMapping("/add")
-    public ModelAndView addBook(Book book){
-        bookService.insertBook(book);
-        ModelAndView modelAndView = new ModelAndView("redirect:/login");
-        return modelAndView;
-    }
+
 
     @GetMapping("/errors")
     public ModelAndView getErrorView(){

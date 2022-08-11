@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<i>This are the books:</i>
+<p th:each="book: ${bookList}" th:text="${book.id}+ '.  /Name: ' +${book.title} +'  /Pageno.: '+ ${book.pageNo} +'  /Publisher: '+ ${book.publisher}"></p>
+</body>
+</html>
