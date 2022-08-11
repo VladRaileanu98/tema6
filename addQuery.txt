@@ -5,7 +5,7 @@ INSERT INTO `bookstore`.`book`(`page_no`,`publisher`,`title`) VALUES(240,"Pengui
 INSERT INTO `bookstore`.`book`(`page_no`,`publisher`,`title`) VALUES(256,"Penguin Random House","7 habits of highly effective people");
 INSERT INTO `bookstore`.`book`(`page_no`,`publisher`,`title`) VALUES(270,"HarperCollins","the primal blueprint");
 INSERT INTO `bookstore`.`book`(`page_no`,`publisher`,`title`) VALUES(220,"HarperCollins","the ultramind solution");
-INSERT INTO `bookstore`.`book`(`page_no`,`publisher`,`title`) VALUES(260,"	Simon & Schuster","the seasons of life");
+INSERT INTO `bookstore`.`book`(`page_no`,`publisher`,`title`) VALUES(260,"Simon & Schuster","the seasons of life");
 INSERT INTO `bookstore`.`book`(`page_no`,`publisher`,`title`) VALUES(230,"HarperCollins","The Blood Sugar Solution: 10-Day Detox Diet");
 
 INSERT INTO `bookstore`.`author`(`birth_year`,`name`)VALUES(1944,"Brian Tracy");
